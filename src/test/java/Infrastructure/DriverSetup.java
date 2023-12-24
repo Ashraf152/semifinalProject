@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverSetup {
-    private static final String driverPATH = "C:\\Users\\pc\\Downloads\\chromedriver-win64 (1)\\chromedriver-win64\\chromedriver.exe";
+    private static final String driverPATH = "chromedriver.exe";
     private WebDriver driver;
 
     public void setupDriver(String driverName) {
