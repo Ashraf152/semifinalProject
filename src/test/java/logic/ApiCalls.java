@@ -4,7 +4,10 @@ import Infrastructure.HttpFacade;
 import Infrastructure.HttpMethod;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
+import Utils.TestContext;
+import org.junit.Test;
 
+import javax.swing.text.AbstractDocument;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,7 +52,7 @@ public class ApiCalls {
 //        System.out.println(arr[arr.length-1]);
 
         //delete address
-        deleteaddress();
+      //  deleteaddress();
 
         //add item to cart
 //        ApiCalls apiCalls=new ApiCalls();
