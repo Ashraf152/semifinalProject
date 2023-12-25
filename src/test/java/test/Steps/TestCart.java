@@ -23,11 +23,10 @@ public class TestCart {
     static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
     @BeforeAll
-    public static void setUP() throws InterruptedException {
+    public static void setUP() throws InterruptedException, IOException {
         driverSetup = new DriverSetup();
         driverSetup.setupDriver("chrome");
         driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
-        driverSetup.getDriver().manage().window().maximize();
         MainPage mainPage = new MainPage(driverSetup.getDriver());
         mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
         items = new HashMap<>();

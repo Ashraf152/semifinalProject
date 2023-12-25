@@ -46,7 +46,8 @@ public class MainPage{
     public void flowPersonalArea(String email , String password) throws InterruptedException {
         this.email.sendKeys(email);
         this.password.sendKeys(password);
-        Thread.sleep(300);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.elementToBeClickable(enterButton));
         enterButton.click();
     }
 }
