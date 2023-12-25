@@ -49,13 +49,4 @@ public class MainPage{
         Thread.sleep(300);
         enterButton.click();
     }
-    // this method just for check
-    public static void main(String[] args) throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","/Users/waseemabusobe/Desktop/chromedriver");
-        WebDriver driver1 = new ChromeDriver();
-        driver1.get("https://www.rami-levy.co.il/he");
-        MainPage mainPage = new MainPage(driver1);
-        // validate the Email And Password corrects
-        mainPage.flowPersonalArea("Email","Pass");
-    }
 }
