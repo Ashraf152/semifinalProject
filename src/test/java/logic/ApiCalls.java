@@ -44,7 +44,6 @@ public class ApiCalls {
         tokenMap.put("Ecomtoken","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwMzQ1MjA4MS41NjIwNjgsIm5iZiI6MTcwMzQ1MjE0MS41NjIwNjgsImV4cCI6MTcwODYzNjA4MS41NjIwNjgsImlkIjo5MjEwNzUsImVtYWlsIjoiYXNocmFmLmVnYmFyaWFAZ21haWwuY29tIiwiY2lkIjoiOTkwMDE1NzkzMDEifQ.DgY2uM2GlpfC2KrLSDHBF8WoW4lx9PKeKgU7mBV45oc");
         // Use the HttpFacade class to send the HTTP request
         return HttpFacade.sendHttpRequest(url, HttpMethod.POST,null,tokenMap,requestBody);
-
     }
 
     public static void main(String[]args)throws IOException{
