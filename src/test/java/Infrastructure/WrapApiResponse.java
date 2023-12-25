@@ -1,4 +1,6 @@
 package Infrastructure;
+import logic.ApiResponse;
+
 import java.util.Map;
 
 public class WrapApiResponse<T> {
@@ -44,4 +46,6 @@ public class WrapApiResponse<T> {
                 ", data=" + data +
                 '}';
     }
+
+
 }
