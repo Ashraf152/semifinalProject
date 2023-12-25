@@ -32,8 +32,8 @@ public class ApiCalls {
         return HttpFacade.sendHttpRequest(url,HttpMethod.POST,null,tokenMap,requestBody);
     }
 
-    public static WrapApiResponse deleteaddress()throws IOException{
-        String url = "https://www-api.rami-levy.co.il/api/v2/site/clubs/addresses/663540";
+    public static WrapApiResponse deleteaddress(String id)throws IOException{
+        String url = "https://www-api.rami-levy.co.il/api/v2/site/clubs/addresses/"+id;
         HashMap<String,String> tokenMap = new HashMap<>();
         tokenMap.put("Ecomtoken","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwMzQ1MjA4MS41NjIwNjgsIm5iZiI6MTcwMzQ1MjE0MS41NjIwNjgsImV4cCI6MTcwODYzNjA4MS41NjIwNjgsImlkIjo5MjEwNzUsImVtYWlsIjoiYXNocmFmLmVnYmFyaWFAZ21haWwuY29tIiwiY2lkIjoiOTkwMDE1NzkzMDEifQ.DgY2uM2GlpfC2KrLSDHBF8WoW4lx9PKeKgU7mBV45oc");
         return HttpFacade.sendHttpRequest(url,HttpMethod.DELETE,null,tokenMap,null);
@@ -55,7 +55,6 @@ public class ApiCalls {
         result=ApiCalls.addNewAdress(adressBodyRequest.toString());
         System.out.println(result);
         result.setData(getJsonData(result.getData()));
-        System.out.println(result.getData().getData().getAllAddresses().keySet());
        Object[] arr = result.getData().getData().getAllAddresses().keySet().toArray();
         System.out.println(arr[arr.length-1]);
 

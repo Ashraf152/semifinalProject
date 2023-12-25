@@ -7,14 +7,12 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.*;
-import org.junit.After;
 import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static logic.ApiCalls.emptyCart;
 public class TestCart {
     static HashMap<String,String> items;
     static DriverSetup driverSetup;
@@ -31,16 +29,19 @@ public class TestCart {
         MainPage mainPage = new MainPage(driverSetup.getDriver());
         mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
         items = new HashMap<>();
-
         // init api
         apiCalls=new ApiCalls();
         result=null;
     }
+
     @AfterAll
-    public static void tearDown() throws IOException {
-        ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
-        emptyCart(jsonbody.toString());
+    public static void tearDown(){
+        driverSetup.closeDriver();
+        items=null;
+        apiCalls=null;
+        result=null;
     }
+
     @When("Add To Cart Item")
     public void addItem(DataTable dataTable) throws IOException {
         List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
@@ -53,9 +54,7 @@ public class TestCart {
         int inClub=0;
         String supplyAt= DateTimeFormat.getCurrentDateTime();
         ItemBodyRequest jsonBody=new ItemBodyRequest(store,inClub,supplyAt,items,null);
-        System.out.println(jsonBody);
         result=ApiCalls.addNewProduct(jsonBody.toString());
-        System.out.println(result);
     }
     @Then("Check The quantity")
     public static void checkTheQuantity() throws InterruptedException {
@@ -67,4 +66,5 @@ public class TestCart {
         }
         Assert.assertEquals(sumQuantity,cartMenu.countItems());
     }
+
 }
