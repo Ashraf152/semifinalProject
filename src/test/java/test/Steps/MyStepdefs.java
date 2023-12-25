@@ -14,10 +14,10 @@ public class MyStepdefs {
     public void iClickOnProfileButton() {
     }
 
-    @And("I enter <{string}>")
+    @And("I enter Email <{string}>")
     public void iEnterMyEmail() {
     }
-    @And("I enter <{string}>")
+    @And("I enter Password <{string}>")
     public void iEnterMyPassword() {
     }
 
