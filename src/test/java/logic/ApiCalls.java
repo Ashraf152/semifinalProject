@@ -28,7 +28,7 @@ public class ApiCalls {
     public static WrapApiResponse addNewAdress(String requestBody)throws IOException{
         String url = "https://www-api.rami-levy.co.il/api/v2/site/clubs/addresses";
         HashMap<String,String> tokenMap = new HashMap<>();
-        tokenMap.put("Ecomtoken","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwMzQ1MjA4MS41NjIwNjgsIm5iZiI6MTcwMzQ1MjE0MS41NjIwNjgsImV4cCI6MTcwODYzNjA4MS41NjIwNjgsImlkIjo5MjEwNzUsImVtYWlsIjoiYXNocmFmLmVnYmFyaWFAZ21haWwuY29tIiwiY2lkIjoiOTkwMDE1NzkzMDEifQ.DgY2uM2GlpfC2KrLSDHBF8WoW4lx9PKeKgU7mBV45oc");
+        tokenMap.put("Ecomtoken","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwMzQ0NTg2Ni44NDQ3MDQsIm5iZiI6MTcwMzQ0NTkyNi44NDQ3MDQsImV4cCI6MTcwODYyOTg2Ni44NDQ3MDQsImlkIjo5MjEwODcsImVtYWlsIjoia21pcmF0MTIzQGdtYWlsLmNvbSIsImNpZCI6Ijk5MDAxNTc5MzEzIn0.vCLMsYEtYOxmR8Udj-UgVqa2ZU2UqfMF4nt8E1VTbuQ");
         return HttpFacade.sendHttpRequest(url,HttpMethod.POST,null,tokenMap,requestBody);
     }
 
