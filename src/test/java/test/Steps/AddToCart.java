@@ -20,36 +20,22 @@ import java.util.Map;
 
 public class AddToCart {
     static HashMap<String,String> items;
-    private static DriverSetup driverSetup;
-    private Login login;
+    private final TestContext context;
     private static WebDriver driver;
     private static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
+    static CartMenu cartMenu;
 
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
-        driver=driverSetup.getDriver();
-        login=new Login(driver);
-        login.fullLoginProccess();
-        items = new HashMap<>();
-        // init api
-        apiCalls=new ApiCalls();
-        result=null;
-    }
-
-    @AfterAll
-    public static void tearDown(){
-        driverSetup.closeDriver();
-        items=null;
-        apiCalls=null;
-        result=null;
+    public AddToCart(TestContext context) {
+        this.context = context;
     }
 
     @When("Add To Cart Item")
     public void addItem(DataTable dataTable) throws IOException {
+        driver=context.get("driver");
+        items = new HashMap<>();
+        apiCalls=new ApiCalls();
+        result=null;
         List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> row : rows) {
             String item = row.get("item");
@@ -64,7 +50,7 @@ public class AddToCart {
     }
     @Then("Check The quantity")
     public static void checkTheQuantity() throws InterruptedException {
-        CartMenu cartMenu = new CartMenu(driver);
+        cartMenu = new CartMenu(driver);
         int sumQuantity = 0;
         for(Map.Entry<String, String> entry : items.entrySet()){
             float floatValue =  Float.parseFloat(entry.getValue());
@@ -78,14 +64,13 @@ public class AddToCart {
         ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
         ApiCalls.emptyCart(jsonbody.toString());
         Thread.sleep(500);
-        driverSetup.getDriver().navigate().refresh();
+        driver.navigate().refresh();
         Thread.sleep(1200);
     }
 
     @Then("Check if the cart is empty")
     public void checkIfTheCartIsEmpty() throws InterruptedException {
-        CartMenu cartMenu = new CartMenu(driver);
-        driver.manage().window().fullscreen();
+        cartMenu = new CartMenu(driver);
         Assert.assertTrue(cartMenu.isEmptyCart());
     }
 }

@@ -2,24 +2,29 @@ package test.Steps;
 
 
 import Infrastructure.DriverSetup;
+import Utils.TestContext;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.Login;
+import org.junit.Assert;
 
 public class LoginSteps {
+    private final TestContext context;
     DriverSetup driverSetup;
-//    @Before
-//    public void setup(){
-//        driverSetup=new DriverSetup();
-//        driverSetup.setupDriver("chrome");
-//    }
+
+    public LoginSteps(TestContext context) {
+        this.context = context;
+    }
+
     @Given("I navigated to {string}")
     public void ramiLeviPage(String url){
-
+        driverSetup=new DriverSetup();
+        driverSetup.setupDriver("chrome");
         driverSetup.navigateToURL(url);
+        context.put("driver",driverSetup.getDriver());
     }
     @When("I click on profile button")
     public void iClickOnProfileButton() {
@@ -46,6 +51,6 @@ public class LoginSteps {
 
     @Then("The main page of the website is appear and My account has been login")
     public void theMainPageOfTheWebsiteIsAppearAndMyAccountHasBeenLogin() {
-
+        Assert.assertTrue(Login.isLogin());
     }
 }

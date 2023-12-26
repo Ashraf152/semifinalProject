@@ -1,7 +1,11 @@
 Feature: Add new address
   Background:
-    Given User added new address to his account
-
+    Given I navigated to 'https://www.rami-levy.co.il/he/'
+    And I click on profile button
+    And I enter my email 'ashraf.egbaria@gmail.com'
+    And I enter my password 'Ashrafadel152'
+    And I click on login Button
+    And User added new address to his account
 
   Scenario: Add new address
     When User click on address management

@@ -1,26 +1,19 @@
 package logic;
-import Infrastructure.WrapApiResponse;
-import Utils.DateTimeFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import static Utils.ApiResponseParser.getJsonData;
-import static logic.ApiCalls.emptyCart;
 public class CartMenu {
     private final  String CART_BLOCK = "ul[data-v-1980ce6d]";
-    private static final String EMPTY_BLOCK = "div[data-v-0a965fa6][data-v-1980ce6d]"; private static WebDriver driver;
+    private static final String EMPTY_BLOCK = "div[data-v-0a965fa6][data-v-1980ce6d]";
+    private static WebDriver driver;
     static WebElement emptyList;
     WebElement list;
     private List<WebElement> liElements;
     public CartMenu(WebDriver driver) throws InterruptedException {
         this.driver = driver;
-        init();
     }
     private void init() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 12);
@@ -29,7 +22,8 @@ public class CartMenu {
         liElements = list.findElements(By.tagName("li"));
         liElements.remove(liElements.size()-1);
     }
-    public int countItems(){
+    public int countItems() throws InterruptedException {
+        init();
         int count = 0;
         for(WebElement e : liElements){
             if(!e.getAttribute("innerHTML").contains("חסר במלאי")){
@@ -39,7 +33,7 @@ public class CartMenu {
         }
         return count;
     }
-    public static boolean isEmptyCart(){
+    public  boolean isEmptyCart(){
         WebDriverWait wait = new WebDriverWait(driver, 12);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(EMPTY_BLOCK)));
         emptyList = driver.findElement(By.cssSelector(EMPTY_BLOCK));
