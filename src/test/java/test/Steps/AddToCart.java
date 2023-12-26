@@ -2,46 +2,53 @@ package test.Steps;
 import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
+import Utils.TestContext;
 import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.*;
-import org.junit.After;
 import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static logic.ApiCalls.emptyCart;
-public class TestCart {
-    static HashMap<String,String> items = new HashMap<>();
-    static DriverSetup driverSetup;
-    static CartMenu cartMenu;
-    static ApiCalls apiCalls;
+
+public class AddToCart {
+    static HashMap<String,String> items;
+    private static DriverSetup driverSetup;
+    private static Login login;
+    private static WebDriver driver;
+    private static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
+    static CartMenu cartMenu;
     @BeforeAll
-    public static void setUP() throws InterruptedException, IOException {
-        driverSetup = new DriverSetup();
+    public static void setup() throws InterruptedException {
+        driverSetup=new DriverSetup();
         driverSetup.setupDriver("chrome");
-        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
-        Login login = new Login(driverSetup.getDriver());
+        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
+        driver=driverSetup.getDriver();
+        login=new Login(driver);
         login.fullLoginProccess();
-        cartMenu = new CartMenu(driverSetup.getDriver());
+        items = new HashMap<>();
         apiCalls=new ApiCalls();
         result=null;
     }
+
     @AfterAll
-    public static void tearDown() throws IOException {
-        ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
-        emptyCart(jsonbody.toString());
-        driverSetup.getDriver().close();
-        driverSetup.getDriver().quit();
+    public static void tearDown(){
+        driverSetup.closeDriver();
+        items=null;
+        apiCalls=null;
+        result=null;
     }
+
     @When("Add To Cart Item")
-    public void addItem(DataTable dataTable) throws IOException, InterruptedException {
+    public void addItem(DataTable dataTable) throws IOException {
         List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> row : rows) {
             String item = row.get("item");
@@ -52,13 +59,11 @@ public class TestCart {
         int inClub=0;
         String supplyAt= DateTimeFormat.getCurrentDateTime();
         ItemBodyRequest jsonBody=new ItemBodyRequest(store,inClub,supplyAt,items,null);
-        System.out.println(jsonBody);
         result=ApiCalls.addNewProduct(jsonBody.toString());
-        System.out.println(result);
     }
     @Then("Check The quantity")
     public static void checkTheQuantity() throws InterruptedException {
-        cartMenu.init();
+        cartMenu = new CartMenu(driver);
         int sumQuantity = 0;
         for(Map.Entry<String, String> entry : items.entrySet()){
             float floatValue =  Float.parseFloat(entry.getValue());
@@ -66,13 +71,19 @@ public class TestCart {
         }
         Assert.assertEquals(sumQuantity,cartMenu.countItems());
     }
-    @Then("Empty The Cart and Check The Quantity Zero")
-    public void checkQuantityToZer() throws IOException, InterruptedException {
+
+    @When("Remove all the item in the cart")
+    public void removeAllTheItemInTheCaert() throws IOException, InterruptedException {
         ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
-        emptyCart(jsonbody.toString());
+        ApiCalls.emptyCart(jsonbody.toString());
         Thread.sleep(500);
         driverSetup.getDriver().navigate().refresh();
         Thread.sleep(1200);
-        Assert.assertEquals(0,cartMenu.emptyCart());
+    }
+
+    @Then("Check if the cart is empty")
+    public void checkIfTheCartIsEmpty() throws InterruptedException {
+        cartMenu = new CartMenu(driver);
+        Assert.assertTrue(cartMenu.isEmptyCart());
     }
 }

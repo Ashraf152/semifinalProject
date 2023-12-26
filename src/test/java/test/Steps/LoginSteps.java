@@ -9,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.Login;
 
-public class LoginTest {
+public class LoginSteps {
     DriverSetup driverSetup;
 //    @Before
 //    public void setup(){
@@ -46,5 +46,6 @@ public class LoginTest {
 
     @Then("The main page of the website is appear and My account has been login")
     public void theMainPageOfTheWebsiteIsAppearAndMyAccountHasBeenLogin() {
+
     }
 }

@@ -33,8 +33,8 @@ public class Login {
     }
     public void fullLoginProccess() throws InterruptedException {
         this.clickOnLoginButton();
-        this.fillEmail("ashraf.egbaria@gmail.com");
-        this.fillPassword("Ashrafadel152");
+        this.fillEmail("waseem-abusobe@hotmail.com");
+        this.fillPassword("Waseem123123");
         Thread.sleep(1200);
         this.clickEnterButton();
 
