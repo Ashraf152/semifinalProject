@@ -1,24 +1,22 @@
 package logic;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 
 public class UpdateUserRequest {
-    @JsonProperty("first_name")
     private String firstName;
 
-    @JsonProperty("last_name")
     private String lastName;
 
-    @JsonProperty("phone")
     private String phone;
 
-    @JsonProperty("additional_phone")
     private String additionalPhone;
 
-    @JsonProperty("sex_id")
     private Integer sexId;
 
-    @JsonProperty("birth_date")
     private String birthDate;
 
     public UpdateUserRequest(String firstName, String lastName, String phone, String additionalPhone, Integer sexId, String birthDate) {
@@ -76,6 +74,19 @@ public class UpdateUserRequest {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{"
+                + "\"first_name\": \""+firstName+"\","
+                + "\"last_name\": \""+lastName+"\","
+                + "\"phone\": \""+phone+"\","
+                + "\"additional_phone\": "+additionalPhone+","
+                + "\"sex_id\": "+sexId+","
+                + "\"birth_date\": "+birthDate+""
+                + "}";
     }
 }
 

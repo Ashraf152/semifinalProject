@@ -17,12 +17,12 @@ import static org.junit.Assert.assertTrue;
 public class CategorySortingTest {
     private DriverSetup driverSetup;
     private WebDriver driver;
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-        driver=driverSetup.getDriver();
-    }
+//    @Before
+//    public void setup(){
+//        driverSetup=new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//        driver=driverSetup.getDriver();
+//    }
     @Given("User navigates to Sugar-reduced products page {string}")
     public void userNavigatesToSugarReducedProductsPage(String url) {
         driver.get(url);

@@ -48,13 +48,23 @@ public class ApiCalls {
 
     public static void main(String[]args)throws IOException{
 
-        //add new Adress
-        ApiCalls apiCalls=new ApiCalls();
-        WrapApiResponse result=null;
-        UpdateUserRequest updateUserRequest=new UpdateUserRequest("abeer","kmirat","0502055874",null,null,null);
-        result=ApiCalls.updatePhoneNumber(updateUserRequest.toString());
+        ApiCalls apiCalls = new ApiCalls();
+        WrapApiResponse result = null;
+
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("abeer", "kmirat", "0502055874", null, null, null);
+//        String body="{"
+//                + "\"first_name\": \"abeer\","
+//                + "\"last_name\": \"kmirat\","
+//                + "\"phone\": \"050-3055601\","
+//                + "\"additional_phone\": null,"
+//                + "\"sex_id\": null,"
+//                + "\"birth_date\": null"
+//                + "}";
+        //System.out.println(body.toString());
+        result = ApiCalls.updatePhoneNumber(updateUserRequest.toString());
         System.out.println(result);
-        result.setData(getJsonData(result.getData()));
+        //result.setData(getJsonData(result.getData()));
+        //result.setData(getJsonData(result.getData()));
 //        System.out.println(result.getData().getData().getAllAddresses().keySet());
 //        Object[] arr = result.getData().getData().getAllAddresses().keySet().toArray();
 //        System.out.println(arr[arr.length-1]);

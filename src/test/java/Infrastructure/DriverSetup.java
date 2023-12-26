@@ -41,4 +41,10 @@ public class DriverSetup {
         return driver.getCurrentUrl();
     }
 
+    public  WebDriver driverNavigateRamyLevy(){
+        setupDriver("chrome");
+        navigateToURL("https://www.rami-levy.co.il/he/");
+        return driver;
+    }
+
 }
