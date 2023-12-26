@@ -32,7 +32,8 @@ public class MainPage{
     private void initLoginBlock(){
         email = driver.findElement(By.id(EMAILID));
         password = driver.findElement(By.id(PASSWORDID));
-        enterButton = driver.findElement(By.cssSelector(ENTER_BUTTON_CSSS_ELECTOR));
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        enterButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ENTER_BUTTON_CSSS_ELECTOR)));
     }
     public void fillEmail(String email){
         this.email.sendKeys(email);
@@ -46,7 +47,7 @@ public class MainPage{
     public void flowPersonalArea(String email , String password) throws InterruptedException {
         this.email.sendKeys(email);
         this.password.sendKeys(password);
-        Thread.sleep(300);
+        Thread.sleep(1200);
         enterButton.click();
     }
 }
