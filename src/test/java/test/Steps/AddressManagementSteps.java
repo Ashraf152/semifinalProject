@@ -3,6 +3,7 @@ package test.Steps;
 import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.TestContext;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,24 +19,32 @@ import static Utils.ApiResponseParser.getJsonData;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AddressManagementTest {
+public class AddressManagementSteps {
     private final TestContext context;
-    private DriverSetup driverSetup;
+    private static DriverSetup driverSetup;
     private Login login;
-    private WebDriver driver;
-    private ApiCalls apiCalls;
-    public AddressManagementTest(TestContext context) {
+    private static WebDriver driver;
+    private static ApiCalls apiCalls;
+    public AddressManagementSteps(TestContext context) {
         this.context = context;
     }
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
-        driver=driverSetup.getDriver();
-        login=new Login(driver);
-        login.fullLoginProccess();
-    }
+//    @Before
+//    public void setup(){
+//        driverSetup=new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
+//        driver=driverSetup.getDriver();
+//        login=new Login(driver);
+//        login.fullLoginProccess();
+//    }
+//
+//
+//    @AfterAll
+//    public static void tearDown(){
+//        driverSetup.closeDriver();
+//        apiCalls=null;
+//        driver.close();
+//    }
     @Given("User added new address to his account")
     public void addNewAddress() throws IOException {
         apiCalls=new ApiCalls();
@@ -60,19 +69,21 @@ public class AddressManagementTest {
 
     @Then("User see the new address been updated")
     public void userSeeTheNewAddressBeenUpdated() {
-        AddressPage addresspage=new AddressPage(driver);
-        assertTrue(addresspage.addressListContainsCity(context.get("newAddressCity")));
+        AddressPage addressPage=new AddressPage(driver);
+        assertTrue(addressPage.addressListContainsCity(context.get("newAddressCity")));
     }
 
     @When("I delete that address")
     public void iDeleteThatAddress() throws IOException {
-        System.out.println("id address -> "+(context.get("IdAddress")));
+        MainPage mainPage=new MainPage(driver);
+        mainPage.clickOnProfileDropDown();
+        mainPage.clickOnAddressManagement();
         ApiCalls.deleteaddress(context.get("IdAddress").toString());
     }
 
     @Then("The address should be removed")
     public void theAddressShouldBeRemoved() {
-        AddressPage addressPage = new AddressPage(driverSetup.getDriver());
+        AddressPage addressPage=new AddressPage(driver);
         assertTrue(addressPage.doesAddressExist());
     }
 }

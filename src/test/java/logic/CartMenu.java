@@ -14,7 +14,8 @@ import static Utils.ApiResponseParser.getJsonData;
 import static logic.ApiCalls.emptyCart;
 public class CartMenu {
     private final  String CART_BLOCK = "ul[data-v-1980ce6d]";
-    private WebDriver driver;
+    private static final String EMPTY_BLOCK = "div[data-v-0a965fa6][data-v-1980ce6d]"; private static WebDriver driver;
+    static WebElement emptyList;
     WebElement list;
     private List<WebElement> liElements;
     public CartMenu(WebDriver driver) throws InterruptedException {
@@ -37,6 +38,16 @@ public class CartMenu {
             }
         }
         return count;
+    }
+    public static boolean isEmptyCart(){
+        WebDriverWait wait = new WebDriverWait(driver, 12);
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(EMPTY_BLOCK)));
+        emptyList = driver.findElement(By.cssSelector(EMPTY_BLOCK));
+        boolean noUl = emptyList.findElements(By.tagName("ul")).isEmpty();
+        boolean noLi = emptyList.findElements(By.tagName("li")).isEmpty();
+        if (noUl && noLi){return true;}
+        else {return false;}
+
     }
 }
 

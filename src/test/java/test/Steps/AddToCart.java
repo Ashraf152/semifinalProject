@@ -2,11 +2,16 @@ package test.Steps;
 import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
+import Utils.TestContext;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.*;
 import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,32 +20,33 @@ import java.util.Map;
 
 public class AddToCart {
     static HashMap<String,String> items;
-    static DriverSetup driverSetup;
-
-    //api values
-    static ApiCalls apiCalls;
+    private static DriverSetup driverSetup;
+    private Login login;
+    private static WebDriver driver;
+    private static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
-//    @BeforeAll
-//    public static void setUP() throws InterruptedException {
-//        driverSetup = new DriverSetup();
-//        driverSetup.setupDriver("chrome");
-//        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
-//        driverSetup.getDriver().manage().window().maximize();
-//        MainPage mainPage = new MainPage(driverSetup.getDriver());
-//        mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
-//        items = new HashMap<>();
-//        // init api
-//        apiCalls=new ApiCalls();
-//        result=null;
-//    }
-//
-//    @AfterAll
-//    public static void tearDown(){
-//        driverSetup.closeDriver();
-//        items=null;
-//        apiCalls=null;
-//        result=null;
-//    }
+
+    @Before
+    public void setup(){
+        driverSetup=new DriverSetup();
+        driverSetup.setupDriver("chrome");
+        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
+        driver=driverSetup.getDriver();
+        login=new Login(driver);
+        login.fullLoginProccess();
+        items = new HashMap<>();
+        // init api
+        apiCalls=new ApiCalls();
+        result=null;
+    }
+
+    @AfterAll
+    public static void tearDown(){
+        driverSetup.closeDriver();
+        items=null;
+        apiCalls=null;
+        result=null;
+    }
 
     @When("Add To Cart Item")
     public void addItem(DataTable dataTable) throws IOException {
@@ -58,7 +64,7 @@ public class AddToCart {
     }
     @Then("Check The quantity")
     public static void checkTheQuantity() throws InterruptedException {
-        CartMenu cartMenu = new CartMenu(driverSetup.getDriver());
+        CartMenu cartMenu = new CartMenu(driver);
         int sumQuantity = 0;
         for(Map.Entry<String, String> entry : items.entrySet()){
             float floatValue =  Float.parseFloat(entry.getValue());
@@ -67,4 +73,19 @@ public class AddToCart {
         Assert.assertEquals(sumQuantity,cartMenu.countItems());
     }
 
+    @When("Remove all the item in the cart")
+    public void removeAllTheItemInTheCaert() throws IOException, InterruptedException {
+        ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
+        ApiCalls.emptyCart(jsonbody.toString());
+        Thread.sleep(500);
+        driverSetup.getDriver().navigate().refresh();
+        Thread.sleep(1200);
+    }
+
+    @Then("Check if the cart is empty")
+    public void checkIfTheCartIsEmpty() throws InterruptedException {
+        CartMenu cartMenu = new CartMenu(driver);
+        driver.manage().window().fullscreen();
+        Assert.assertTrue(cartMenu.isEmptyCart());
+    }
 }

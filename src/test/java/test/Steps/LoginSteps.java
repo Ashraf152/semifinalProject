@@ -9,13 +9,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.Login;
 
-public class LoginTest {
+public class LoginSteps {
     DriverSetup driverSetup;
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-    }
+//    @Before
+//    public void setup(){
+//        driverSetup=new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//    }
     @Given("I navigated to {string}")
     public void ramiLeviPage(String url){
 
@@ -46,5 +46,6 @@ public class LoginTest {
 
     @Then("The main page of the website is appear and My account has been login")
     public void theMainPageOfTheWebsiteIsAppearAndMyAccountHasBeenLogin() {
+
     }
 }

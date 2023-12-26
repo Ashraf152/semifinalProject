@@ -6,3 +6,7 @@ Feature: Add To Cart Rami_Levy
     | 131770 |2.00 |
     | 3691   |2.00 |
   Then Check The quantity
+
+    Scenario: Check if the cart empty
+      When Remove all the item in the cart
+      Then Check if the cart is empty
