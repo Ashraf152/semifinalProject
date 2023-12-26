@@ -24,12 +24,10 @@ public class Header extends BasePage {
         this.userButton.click();
     }
     public void clickOnProfileDropDown(){
-        if(!userButton.isDisplayed()) {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            this.profileDropDownButton = wait.until(ExpectedConditions
-                    .elementToBeClickable(By.xpath(PROFILE_DROPDOWN)));
-            this.profileDropDownButton.click();
-        }
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        this.profileDropDownButton = wait.until(ExpectedConditions
+                .elementToBeClickable(By.xpath(PROFILE_DROPDOWN)));
+        this.profileDropDownButton.click();
     }
     public void clickOnAddressManagement(){
         this.addressManagement= driver.findElement(By.xpath(ADRESS_MANAGMENT));

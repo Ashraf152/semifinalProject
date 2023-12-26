@@ -25,15 +25,15 @@ public class AddressManagementTest {
     public AddressManagementTest(TestContext context) {
         this.context = context;
     }
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
-        driver=driverSetup.getDriver();
-        login=new Login(driver);
-        login.fullLoginProccess();
-    }
+//    @Before
+//    public void setup(){
+//        driverSetup=new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
+//        driver=driverSetup.getDriver();
+//        login=new Login(driver);
+//        login.fullLoginProccess();
+//    }
     @Given("User added new address to his account")
     public void addNewAddress() throws IOException {
         apiCalls=new ApiCalls();
@@ -41,7 +41,6 @@ public class AddressManagementTest {
         AdressBodyRequest addressBodyRequest=new AdressBodyRequest(null,2779,"עכו","12","12","12","12",null,"12");
         result=ApiCalls.addNewAdress(addressBodyRequest.toString());
         result.setData(getJsonData(result.getData()));
-        Object[] arr = result.getData().getData().getAllAddresses().keySet().toArray();
         String newAddressCity = result.getData().getData().getNewAddress().getCity();
         int id=result.getData().getData().getNewAddress().getId();
         context.put("IdAddress",id);

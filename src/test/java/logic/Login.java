@@ -35,8 +35,8 @@ public class Login {
     }
     public void fullLoginProccess()  {
         this.clickOnLoginButton();
-        this.fillEmail("kmirat123@gmail.com");
-        this.fillPassword("abeer123");
+        this.fillEmail("ashraf.egbaria@gmail.com");
+        this.fillPassword("Ashrafadel152");
         this.clickEnterButton();
 
     }
