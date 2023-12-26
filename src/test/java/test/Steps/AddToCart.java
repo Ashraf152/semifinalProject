@@ -61,6 +61,7 @@ public class AddToCart {
 
     @When("Remove all the item in the cart")
     public void removeAllTheItemInTheCaert() throws IOException, InterruptedException {
+        driver=context.get("driver");
         ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
         ApiCalls.emptyCart(jsonbody.toString());
         Thread.sleep(500);

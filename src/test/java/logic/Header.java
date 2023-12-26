@@ -23,11 +23,12 @@ public class Header extends BasePage {
     public void clickOnLoginButton(){
         this.userButton.click();
     }
-    public void clickOnProfileDropDown(){
+    public void clickOnProfileDropDown() {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
         this.profileDropDownButton = wait.until(ExpectedConditions
                 .elementToBeClickable(By.xpath(PROFILE_DROPDOWN)));
+        //Thread.sleep(5000);
         this.profileDropDownButton.click();
 
     }

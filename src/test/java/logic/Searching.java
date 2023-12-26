@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Searching {
-    private static final String tittle ="/html/head/title";
+    private static final String TITLE ="//*[@id=\"result-search\"]/div/span[2]";
     private final String SEARCHFIELD = "destination";
     private WebElement searchInput;
     private static WebDriver driver;
@@ -34,8 +34,9 @@ public class Searching {
         searchInput.sendKeys(Keys.ENTER);
     }
     public static boolean getTittle(){
-        WebElement tittleElement = driver.findElement(By.xpath(tittle));
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebElement tittleElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(TITLE)));
         System.out.println("tittle "+tittleElement.getText());
-        return (tittleElement.getText().contains("חיפוש מוצרים באתר - רמי לוי אונליין"));
+        return (tittleElement.getText().contains("חלב"));
     }
 }

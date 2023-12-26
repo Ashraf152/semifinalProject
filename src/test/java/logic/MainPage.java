@@ -9,7 +9,7 @@ public class MainPage extends BasePage {
         super(driver);
         header=new Header(driver);
     }
-    public void clickOnProfileDropDown(){
+    public void clickOnProfileDropDown()  {
         header.clickOnProfileDropDown();
     }
     public void clickOnAddressManagement(){

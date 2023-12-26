@@ -19,12 +19,13 @@ public class AddressManagementSteps {
     private static WebDriver driver;
     private static ApiCalls apiCalls;
     public AddressManagementSteps(TestContext context) {
-        this.context = context;
-    }
 
+        this.context = context;
+        driver=context.get("driver");
+    }
     @And("User added new address to his account")
     public void addNewAddress() throws IOException {
-        driver=context.get("driver");
+
         apiCalls=new ApiCalls();
         WrapApiResponse<AdressApiResponse> result;
         AdressBodyRequest addressBodyRequest=new AdressBodyRequest(null,2779,"עכו","12","12","12","12",null,"12");
@@ -39,10 +40,11 @@ public class AddressManagementSteps {
     }
 
     @When("User click on address management")
-    public void userClickOnAddressManagement() {
+    public void userClickOnAddressManagement() throws InterruptedException {
         MainPage mainPage=new MainPage(driver);
-        mainPage.clickOnProfileDropDown();
-        mainPage.clickOnAddressManagement();
+        Thread.sleep(5000);
+        driver.navigate().to("https://www.rami-levy.co.il/he/dashboard/addresses");
+
     }
 
     @Then("User see the new address been updated")
@@ -52,10 +54,10 @@ public class AddressManagementSteps {
     }
 
     @When("I delete that address")
-    public void iDeleteThatAddress() throws IOException {
+    public void iDeleteThatAddress() throws IOException, InterruptedException {
         MainPage mainPage=new MainPage(driver);
-        mainPage.clickOnProfileDropDown();
-        mainPage.clickOnAddressManagement();
+        Thread.sleep(5000);
+        driver.navigate().to("https://www.rami-levy.co.il/he/dashboard/addresses");
         ApiCalls.deleteaddress(context.get("IdAddress").toString());
     }
 
