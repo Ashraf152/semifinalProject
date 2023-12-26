@@ -3,10 +3,8 @@ package Infrastructure;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class HttpFacade {

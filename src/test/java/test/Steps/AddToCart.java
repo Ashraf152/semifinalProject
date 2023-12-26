@@ -2,45 +2,45 @@ package test.Steps;
 import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.*;
 import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-public class TestCart {
+
+public class AddToCart {
     static HashMap<String,String> items;
     static DriverSetup driverSetup;
 
     //api values
     static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
-    @BeforeAll
-    public static void setUP() throws InterruptedException {
-        driverSetup = new DriverSetup();
-        driverSetup.setupDriver("chrome");
-        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
-        driverSetup.getDriver().manage().window().maximize();
-        MainPage mainPage = new MainPage(driverSetup.getDriver());
-        mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
-        items = new HashMap<>();
-        // init api
-        apiCalls=new ApiCalls();
-        result=null;
-    }
-
-    @AfterAll
-    public static void tearDown(){
-        driverSetup.closeDriver();
-        items=null;
-        apiCalls=null;
-        result=null;
-    }
+//    @BeforeAll
+//    public static void setUP() throws InterruptedException {
+//        driverSetup = new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
+//        driverSetup.getDriver().manage().window().maximize();
+//        MainPage mainPage = new MainPage(driverSetup.getDriver());
+//        mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
+//        items = new HashMap<>();
+//        // init api
+//        apiCalls=new ApiCalls();
+//        result=null;
+//    }
+//
+//    @AfterAll
+//    public static void tearDown(){
+//        driverSetup.closeDriver();
+//        items=null;
+//        apiCalls=null;
+//        result=null;
+//    }
 
     @When("Add To Cart Item")
     public void addItem(DataTable dataTable) throws IOException {
