@@ -1,4 +1,6 @@
 Feature: Add To Cart Rami_Levy
+  Background:
+    Given setUp
   Scenario: Add to cart Items And Check if is added
   When Add To Cart Item
     | item   |quantity|

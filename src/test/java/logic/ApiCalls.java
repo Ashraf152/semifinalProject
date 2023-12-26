@@ -12,7 +12,8 @@ import static Utils.ApiResponseParser.getJsonData;
 public class ApiCalls {
 
     private static final String BASE_URL = "https://www.rami-levy.co.il/api/v2";
-    private static final String ecomTocen="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwMzU3NTkyMi44MDUzMiwibmJmIjoxNzAzNTc1OTgyLjgwNTMyLCJleHAiOjE3MDg3NTk5MjIuODA1MzIsImlkIjo5MjEwNzUsImVtYWlsIjoiYXNocmFmLmVnYmFyaWFAZ21haWwuY29tIiwiY2lkIjoiOTkwMDE1NzkzMDEifQ.KzXZx5V0IKF8hu6GVIdW9W3LziSApuMIgIDdxsAvYkk";
+    private static final String ecomTocen="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwMzU5NzMxMS42NTM4NTgsIm5iZiI6MTcwMzU5NzM3MS42NTM4NTgsImV4cCI6MTcwODc4MTMxMS42NTM4NTgsImlkIjo5MjEwODUsImVtYWlsIjoid2FzZWVtLWFidXNvYmVAaG90bWFpbC5jb20iLCJjaWQiOiI5OTAwMTU3OTMxMSJ9.59Z7Cf2qpBTRWBFcUvguUxAJAnNrGPRpoW3cCLmRFHA";
+
 
     public static WrapApiResponse addNewProduct(String requestBody) throws IOException {
         String url = BASE_URL+"/cart";
@@ -52,12 +53,12 @@ public class ApiCalls {
     public static void main(String[]args)throws IOException{
 
 
-        ApiCalls apiCalls=new ApiCalls();
-        WrapApiResponse result=null;
-        UpdateUserRequest updateUserRequest=new UpdateUserRequest("abeer","kmirat","0502055874",null,null,null);
-        result=ApiCalls.updatePhoneNumber(updateUserRequest.toString());
-        System.out.println(result);
-        result.setData(getJsonData(result.getData()));
+//        ApiCalls apiCalls=new ApiCalls();
+//        WrapApiResponse result=null;
+//        UpdateUserRequest updateUserRequest=new UpdateUserRequest("abeer","kmirat","0502055874",null,null,null);
+//        result=ApiCalls.updatePhoneNumber(updateUserRequest.toString());
+//        System.out.println(result);
+//        result.setData(getJsonData(result.getData()));
 
         //add new address
 //        ApiCalls apiCalls=new ApiCalls();

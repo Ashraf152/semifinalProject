@@ -6,6 +6,7 @@ import Utils.TestContext;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.*;
@@ -21,13 +22,14 @@ import java.util.Map;
 public class AddToCart {
     static HashMap<String,String> items;
     private static DriverSetup driverSetup;
-    private Login login;
+    private static Login login;
     private static WebDriver driver;
     private static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
+    static CartMenu cartMenu;
 
-    @Before
-    public void setup(){
+    @Given("setUp")
+    public static void setup() throws InterruptedException {
         driverSetup=new DriverSetup();
         driverSetup.setupDriver("chrome");
         driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
@@ -35,7 +37,6 @@ public class AddToCart {
         login=new Login(driver);
         login.fullLoginProccess();
         items = new HashMap<>();
-        // init api
         apiCalls=new ApiCalls();
         result=null;
     }
@@ -64,7 +65,7 @@ public class AddToCart {
     }
     @Then("Check The quantity")
     public static void checkTheQuantity() throws InterruptedException {
-        CartMenu cartMenu = new CartMenu(driver);
+        cartMenu = new CartMenu(driver);
         int sumQuantity = 0;
         for(Map.Entry<String, String> entry : items.entrySet()){
             float floatValue =  Float.parseFloat(entry.getValue());
@@ -84,8 +85,7 @@ public class AddToCart {
 
     @Then("Check if the cart is empty")
     public void checkIfTheCartIsEmpty() throws InterruptedException {
-        CartMenu cartMenu = new CartMenu(driver);
-        driver.manage().window().fullscreen();
+        cartMenu = new CartMenu(driver);
         Assert.assertTrue(cartMenu.isEmptyCart());
     }
 }

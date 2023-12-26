@@ -20,9 +20,7 @@ public class Header extends BasePage {
         super(driver);
         this.userButton = driver.findElement(By.id(USER_BUTTON));
     }
-    public void clickOnLoginButton(){
-        this.userButton.click();
-    }
+    public void clickOnLoginButton(){this.userButton.click();}
     public void clickOnProfileDropDown(){
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -34,5 +32,8 @@ public class Header extends BasePage {
     public void clickOnAddressManagement(){
         this.addressManagement= driver.findElement(By.xpath(ADRESS_MANAGMENT));
         this.addressManagement.click();
+    }
+    public String getUserName() throws InterruptedException {
+        return userButton.getText();
     }
 }

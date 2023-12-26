@@ -1,6 +1,8 @@
 package logic;
+import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
+import com.google.gson.stream.JsonToken;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +22,6 @@ public class CartMenu {
     private List<WebElement> liElements;
     public CartMenu(WebDriver driver) throws InterruptedException {
         this.driver = driver;
-        init();
     }
     private void init() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 12);
@@ -29,7 +30,8 @@ public class CartMenu {
         liElements = list.findElements(By.tagName("li"));
         liElements.remove(liElements.size()-1);
     }
-    public int countItems(){
+    public int countItems() throws InterruptedException {
+        init();
         int count = 0;
         for(WebElement e : liElements){
             if(!e.getAttribute("innerHTML").contains("חסר במלאי")){
@@ -39,7 +41,7 @@ public class CartMenu {
         }
         return count;
     }
-    public static boolean isEmptyCart(){
+    public  boolean isEmptyCart(){
         WebDriverWait wait = new WebDriverWait(driver, 12);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(EMPTY_BLOCK)));
         emptyList = driver.findElement(By.cssSelector(EMPTY_BLOCK));
@@ -48,6 +50,14 @@ public class CartMenu {
         if (noUl && noLi){return true;}
         else {return false;}
 
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        DriverSetup driverSetup = new DriverSetup();
+        driverSetup.setupDriver("chrome");
+        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
+        Header header = new Header(driverSetup.getDriver());
+        System.out.println(header.getUserName());
     }
 }
 
