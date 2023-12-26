@@ -1,7 +1,5 @@
 package logic;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 public class AdressBodyRequest {
     private String name;
