@@ -8,7 +8,7 @@ Feature: Add new address
     And User added new address to his account
 
   Scenario: Add new address
-    When User click on address management
+    When User navigate to address management page
     Then User see the new address been updated
 
   Scenario: Validate that we have remove the address

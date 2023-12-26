@@ -39,7 +39,7 @@ public class AddressManagementSteps {
         System.out.println(id+" "+newAddressCity);
     }
 
-    @When("User click on address management")
+    @When("User navigate to address management page")
     public void userClickOnAddressManagement() throws InterruptedException {
         MainPage mainPage=new MainPage(driver);
         Thread.sleep(5000);

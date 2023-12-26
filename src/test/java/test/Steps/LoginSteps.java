@@ -3,7 +3,6 @@ package test.Steps;
 
 import Infrastructure.DriverSetup;
 import Utils.TestContext;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -44,9 +43,10 @@ public class LoginSteps {
     }
 
     @And("I click on login Button")
-    public void iClickOnLoginButton() {
+    public void iClickOnLoginButton() throws InterruptedException {
         Login login=new Login(driverSetup.getDriver());
         login.clickEnterButton();
+
     }
 
     @Then("The main page of the website is appear and My account has been login")

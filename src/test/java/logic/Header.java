@@ -36,4 +36,7 @@ public class Header extends BasePage {
         this.addressManagement= driver.findElement(By.xpath(ADRESS_MANAGMENT));
         this.addressManagement.click();
     }
+    public String getUserName() {
+        return userButton.getText();
+    }
 }
