@@ -10,18 +10,16 @@ import logic.*;
 import org.junit.After;
 import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
-import org.junit.Before;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static logic.ApiCalls.emptyCart;
 public class TestCart {
-    static HashMap<String,String> items;
+    static HashMap<String,String> items = new HashMap<>();
     static DriverSetup driverSetup;
     static CartMenu cartMenu;
-
-    //api values
     static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
     @BeforeAll
@@ -29,12 +27,9 @@ public class TestCart {
         driverSetup = new DriverSetup();
         driverSetup.setupDriver("chrome");
         driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
-        MainPage mainPage = new MainPage(driverSetup.getDriver());
-        mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
+        Login login = new Login(driverSetup.getDriver());
+        login.fullLoginProccess();
         cartMenu = new CartMenu(driverSetup.getDriver());
-        items = new HashMap<>();
-
-        // init api
         apiCalls=new ApiCalls();
         result=null;
     }
@@ -42,6 +37,8 @@ public class TestCart {
     public static void tearDown() throws IOException {
         ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
         emptyCart(jsonbody.toString());
+        driverSetup.getDriver().close();
+        driverSetup.getDriver().quit();
     }
     @When("Add To Cart Item")
     public void addItem(DataTable dataTable) throws IOException, InterruptedException {
@@ -67,16 +64,15 @@ public class TestCart {
             float floatValue =  Float.parseFloat(entry.getValue());
             sumQuantity+= (int) floatValue ;
         }
-
-
         Assert.assertEquals(sumQuantity,cartMenu.countItems());
     }
     @Then("Empty The Cart and Check The Quantity Zero")
     public void checkQuantityToZer() throws IOException, InterruptedException {
         ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
         emptyCart(jsonbody.toString());
-        Thread.sleep(1200);
+        Thread.sleep(500);
         driverSetup.getDriver().navigate().refresh();
+        Thread.sleep(1200);
         Assert.assertEquals(0,cartMenu.emptyCart());
     }
 }

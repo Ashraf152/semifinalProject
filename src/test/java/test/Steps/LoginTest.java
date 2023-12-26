@@ -11,11 +11,11 @@ import logic.Login;
 
 public class LoginTest {
     DriverSetup driverSetup;
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-    }
+//    @Before
+//    public void setup(){
+//        driverSetup=new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//    }
     @Given("I navigated to {string}")
     public void ramiLeviPage(String url){
 

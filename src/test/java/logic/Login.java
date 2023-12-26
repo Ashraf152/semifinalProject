@@ -31,10 +31,11 @@ public class Login {
         this.enterButton = driver.findElement(By.cssSelector(ENTER_BUTTON_CSSS_ELECTOR));
         this.enterButton.click();
     }
-    public void fullLoginProccess()  {
+    public void fullLoginProccess() throws InterruptedException {
         this.clickOnLoginButton();
         this.fillEmail("ashraf.egbaria@gmail.com");
         this.fillPassword("Ashrafadel152");
+        Thread.sleep(1200);
         this.clickEnterButton();
 
     }

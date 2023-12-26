@@ -4,6 +4,7 @@ import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.TestContext;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,22 +21,22 @@ import static org.junit.Assert.assertTrue;
 
 public class AddressManagementTest {
     private final TestContext context;
-    private DriverSetup driverSetup;
-    private Login login;
-    private WebDriver driver;
-    private ApiCalls apiCalls;
+    static private DriverSetup driverSetup;
+   static private Login login;
+    static private WebDriver driver;
+    static private ApiCalls apiCalls;
     public AddressManagementTest(TestContext context) {
         this.context = context;
     }
-    @Before
-    public void setup(){
-        driverSetup=new DriverSetup();
-        driverSetup.setupDriver("chrome");
-        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
-        driver=driverSetup.getDriver();
-        login=new Login(driver);
-        login.fullLoginProccess();
-    }
+//    @BeforeAll
+//    public static void setup() throws InterruptedException {
+//        driverSetup=new DriverSetup();
+//        driverSetup.setupDriver("chrome");
+//        driverSetup.navigateToURL("https://www.rami-levy.co.il/he/");
+//        driver=driverSetup.getDriver();
+//        login=new Login(driver);
+//        login.fullLoginProccess();
+//    }
     @Given("User added new address to his account")
     public void addNewAddress() throws IOException {
         apiCalls=new ApiCalls();

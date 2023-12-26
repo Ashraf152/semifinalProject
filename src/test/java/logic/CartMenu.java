@@ -56,8 +56,9 @@ public class CartMenu {
         driverSetup = new DriverSetup();
         driverSetup.setupDriver("chrome");
         driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
-        MainPage mainPage = new MainPage(driverSetup.getDriver());
-        mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
+        Login login = new Login(driverSetup.getDriver());
+        login.fullLoginProccess();
+        driverSetup.getDriver().navigate().refresh();
     }
 }
 
