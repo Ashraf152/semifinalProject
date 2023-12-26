@@ -1,6 +1,8 @@
 package logic;
+import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
+import com.google.gson.stream.JsonToken;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,6 +50,14 @@ public class CartMenu {
         if (noUl && noLi){return true;}
         else {return false;}
 
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        DriverSetup driverSetup = new DriverSetup();
+        driverSetup.setupDriver("chrome");
+        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
+        Header header = new Header(driverSetup.getDriver());
+        System.out.println(header.getUserName());
     }
 }
 

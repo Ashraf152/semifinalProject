@@ -6,6 +6,7 @@ import Utils.TestContext;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import logic.*;
@@ -26,7 +27,8 @@ public class AddToCart {
     private static ApiCalls apiCalls;
     static WrapApiResponse<ApiResponse> result;
     static CartMenu cartMenu;
-    @BeforeAll
+
+    @Given("setUp")
     public static void setup() throws InterruptedException {
         driverSetup=new DriverSetup();
         driverSetup.setupDriver("chrome");
