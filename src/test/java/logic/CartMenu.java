@@ -1,7 +1,9 @@
 package logic;
+import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,16 +23,15 @@ public class CartMenu {
     private List<WebElement> liElements;
     public CartMenu(WebDriver driver) throws InterruptedException {
         this.driver = driver;
-        init();
     }
-    private void init() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(CART_BLOCK + " li")));
+    public void init() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 12);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("ul[data-v-1980ce6d]")));
         list = driver.findElement(By.cssSelector(CART_BLOCK));
         liElements = list.findElements(By.tagName("li"));
         liElements.remove(liElements.size()-1);
     }
-    public int countItems(){
+    public int countItems() throws InterruptedException {
         int count = 0;
         for(WebElement e : liElements){
             if(!e.getAttribute("innerHTML").contains("חסר במלאי")){
@@ -48,6 +49,15 @@ public class CartMenu {
         boolean noLi = emptyList.findElements(By.tagName("li")).isEmpty();
         if (noUl && noLi){return 0;}
         else {return -1;}
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        DriverSetup driverSetup = new DriverSetup();
+        driverSetup = new DriverSetup();
+        driverSetup.setupDriver("chrome");
+        driverSetup.getDriver().get("https://www.rami-levy.co.il/he");
+        MainPage mainPage = new MainPage(driverSetup.getDriver());
+        mainPage.flowPersonalArea("ashraf.egbaria@gmail.com","Ashrafadel152");
     }
 }
 
