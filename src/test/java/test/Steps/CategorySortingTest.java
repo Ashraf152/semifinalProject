@@ -1,12 +1,12 @@
 package test.Steps;
 
 import Infrastructure.DriverSetup;
-import Utils.TestContext;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import logic.ProductPage;
+import logic.browser.SortCategory;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertTrue;
@@ -21,22 +21,27 @@ public class CategorySortingTest {
         driver=driverSetup.getDriver();
         driver.get(url);
     }
+    @After
+    public void tearDown(){
+        driverSetup.getDriver().close();
+    }
 
     @When("User click on filter button")
-    public void userClickOnFilterButton() {
-        ProductPage productPage=new ProductPage(driver);
+    public void userClickOnFilterButton() throws InterruptedException {
+        Thread.sleep(500);
+        SortCategory productPage=new SortCategory(driver);
         productPage.clickOnFilterButton();
     }
-
     @And("User open sorting dropdown and choose from cheap to expensive")
-    public void userOpenSortingDropdownAndChooseFromCheapToExpensive() {
-        ProductPage productPage=new ProductPage(driver);
+    public void userOpenSortingDropdownAndChooseFromCheapToExpensive() throws InterruptedException {
+        Thread.sleep(500);
+        SortCategory productPage=new SortCategory(driver);
         productPage.clickSortButton();
     }
-
     @Then("Products have been sorted")
-    public void productsHaveBeenSorted() {
-        ProductPage productPage=new ProductPage(driver);
+    public void productsHaveBeenSorted() throws InterruptedException {
+        Thread.sleep(500);
+        SortCategory productPage=new SortCategory(driver);
         assertTrue(productPage.isSorted());
     }
 }

@@ -1,14 +1,15 @@
-package logic;
+package logic.browser;
 
 import Infrastructure.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductPage extends BasePage {
+public class SortCategory extends BasePage {
     private final String  FILTER_BUTTON= "//div[@class='d-flex align-items-center bg-gray-300- border-radius-10 cursor-pointer m-1']";
     private final String SORT_BUTTON="//button[@class='sort cursor-pointer focus-item border-radius-10 border-0 bg-white w-100 py-3- text-left d-flex align-items-center blue-n']";
     private final String FIRSTCATEGORY="(//div[@class='focus-item online-catalog-wrap pb-3 pb-lg-1 d-flex flex-wrap align-content-end'])[1]//span[@class='position-relative currency-wrap overflow-ellipsis lm-text currency-product']";
@@ -20,7 +21,7 @@ public class ProductPage extends BasePage {
     private List<WebElement> itemsList;
 
 
-    public ProductPage(WebDriver driver) {
+    public SortCategory(WebDriver driver) {
         super(driver);
     }
     public void clickOnFilterButton(){
@@ -55,5 +56,4 @@ public class ProductPage extends BasePage {
         }
         return true;
     }
-
 }

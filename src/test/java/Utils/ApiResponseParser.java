@@ -2,7 +2,7 @@ package Utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import logic.AdressApiResponse;
+import logic.api.AdressApiResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponseParser {

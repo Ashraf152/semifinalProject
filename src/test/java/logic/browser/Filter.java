@@ -1,4 +1,4 @@
-package logic;
+package logic.browser;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,10 +15,6 @@ public class Filter {
         this.driver = driver;
         driver.manage().window().maximize();
         this.wait = new WebDriverWait(driver, 10);
-        initPage();
-    }
-
-    private void initPage() {
         this.filterButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(FILTERBUTTON)));
     }
 
@@ -27,7 +23,6 @@ public class Filter {
     }
 
     public void clickOnLabel() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(COOSENLABEL)));
         WebElement checkbox = driver.findElement(By.xpath(COOSENLABEL));
         if (!checkbox.isSelected()) {

@@ -1,4 +1,4 @@
-package logic;
+package logic.api;
 
 
 public class AdressBodyRequest {

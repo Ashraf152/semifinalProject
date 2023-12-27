@@ -1,14 +1,13 @@
 package test.Steps;
-import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.DateTimeFormat;
 import Utils.TestContext;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import logic.*;
+import logic.api.ApiCalls;
+import logic.api.ApiResponse;
+import logic.api.ItemBodyRequest;
+import logic.browser.CartMenu;
 import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +48,7 @@ public class AddToCart {
         result=ApiCalls.addNewProduct(jsonBody.toString());
     }
     @Then("Check The quantity")
-    public static void checkTheQuantity() throws InterruptedException {
+    public static void checkTheQuantity() throws InterruptedException, IOException {
         cartMenu = new CartMenu(driver);
         int sumQuantity = 0;
         for(Map.Entry<String, String> entry : items.entrySet()){
@@ -57,6 +56,8 @@ public class AddToCart {
             sumQuantity+= (int) floatValue ;
         }
         Assert.assertEquals(sumQuantity,cartMenu.countItems());
+        ItemBodyRequest jsonbody=new ItemBodyRequest("331",0,DateTimeFormat.getCurrentDateTime(),new HashMap<String,String>(),null);
+        ApiCalls.emptyCart(jsonbody.toString());
     }
 
     @When("Remove all the item in the cart")

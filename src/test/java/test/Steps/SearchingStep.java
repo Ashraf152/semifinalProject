@@ -5,12 +5,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import logic.Searching;
+import logic.browser.Searching;
 import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 public class SearchingStep {
     private WebDriver driver;

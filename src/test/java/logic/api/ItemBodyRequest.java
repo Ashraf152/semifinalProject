@@ -1,4 +1,4 @@
-package logic;
+package logic.api;
 
 import java.util.Map;
 

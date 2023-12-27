@@ -1,10 +1,9 @@
 package test.Steps;
 
-import Infrastructure.DriverSetup;
 import Utils.TestContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import logic.Logout;
+import logic.browser.Logout;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 

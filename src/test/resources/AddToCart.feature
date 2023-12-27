@@ -5,13 +5,13 @@ Feature: Add To Cart Rami_Levy
     And I enter my email 'ashraf.egbaria@gmail.com'
     And I enter my password 'Ashrafadel152'
     And I click on login Button
+    When Add To Cart Item
+      | item   |quantity|
+      | 377697 |1.00 |
+      | 131770 |2.00 |
+      | 3691   |2.00 |
 
   Scenario: Add to cart Items And Check if is added
-  When Add To Cart Item
-    | item   |quantity|
-    | 354095 |1.00 |
-    | 131770 |2.00 |
-    | 3691   |2.00 |
   Then Check The quantity
 
     Scenario: Check if the cart empty

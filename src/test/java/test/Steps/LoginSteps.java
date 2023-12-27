@@ -3,11 +3,12 @@ package test.Steps;
 
 import Infrastructure.DriverSetup;
 import Utils.TestContext;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import logic.Login;
+import logic.browser.Login;
 import org.junit.Assert;
 
 public class LoginSteps {
@@ -17,6 +18,7 @@ public class LoginSteps {
     public LoginSteps(TestContext context) {
         this.context = context;
     }
+
 
     @Given("I navigated to {string}")
     public void ramiLeviPage(String url){

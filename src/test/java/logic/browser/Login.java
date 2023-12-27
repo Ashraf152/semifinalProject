@@ -1,4 +1,5 @@
-package logic;
+package logic.browser;
+import logic.browser.Header;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

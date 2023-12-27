@@ -1,14 +1,15 @@
 package test.Steps;
 
-import Infrastructure.DriverSetup;
 import Infrastructure.WrapApiResponse;
 import Utils.TestContext;
-import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import logic.*;
+import logic.api.AdressApiResponse;
+import logic.api.AdressBodyRequest;
+import logic.api.ApiCalls;
+import logic.browser.AddressPage;
 import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 import static Utils.ApiResponseParser.getJsonData;
@@ -19,7 +20,6 @@ public class AddressManagementSteps {
     private static WebDriver driver;
     private static ApiCalls apiCalls;
     public AddressManagementSteps(TestContext context) {
-
         this.context = context;
         driver=context.get("driver");
     }
@@ -41,21 +41,20 @@ public class AddressManagementSteps {
 
     @When("User navigate to address management page")
     public void userClickOnAddressManagement() throws InterruptedException {
-        MainPage mainPage=new MainPage(driver);
         Thread.sleep(5000);
         driver.navigate().to("https://www.rami-levy.co.il/he/dashboard/addresses");
 
     }
 
     @Then("User see the new address been updated")
-    public void userSeeTheNewAddressBeenUpdated() {
+    public void userSeeTheNewAddressBeenUpdated() throws IOException {
         AddressPage addresspage=new AddressPage(driver);
         assertTrue(addresspage.addressListContainsCity(context.get("newAddressCity")));
+        ApiCalls.deleteaddress(context.get("IdAddress").toString());
     }
 
     @When("I delete that address")
     public void iDeleteThatAddress() throws IOException, InterruptedException {
-        MainPage mainPage=new MainPage(driver);
         Thread.sleep(5000);
         driver.navigate().to("https://www.rami-levy.co.il/he/dashboard/addresses");
         ApiCalls.deleteaddress(context.get("IdAddress").toString());
